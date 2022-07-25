@@ -1,0 +1,36 @@
+<p>work !!!!!!!!!!!</p>
+    <div class="app-wrapper">
+	    
+	    <div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">
+			    
+			    <div class="row g-3 mb-4 align-items-center justify-content-between">
+				    <div class="col-auto">
+			            <h1 class="app-page-title mb-0">Mise à jour status livraison</h1>
+				    </div>
+				    <div class="col-auto">
+					     <div class="page-utilities">
+						    <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+							  
+							    
+						    </div><!--//row-->
+					    </div><!--//table-utilities-->
+				    </div><!--//col-auto-->
+			    </div><!--//row-->
+			   
+			    
+                <div class="col-auto">
+                    <label >Livraison ID :  </label> <label > {{livraison._id}}</label>    <br><br>
+                    <label >Adresse :  </label> <label > {{livraison.lieu}}</label>    <br><br>
+                    <label >Date de Livraison :  </label> <label > {{livraison.dateLivraison}}</label>    <br><br>
+
+                    <select class="form-select w-auto"   (change)="onSelected(teams.value)" #teams required>
+                          <option selected > </option>
+                          <option >En cours de livraison</option>
+                          <option >Livré</option>
+                          <option >Clos</option>
+                          
+                    </select>
+<br><br>
+                    <button class="btn btn-sm btn-warning" (click)="updateLivraison()" routerLink="../../livraison">modifier</button>
+                </div>

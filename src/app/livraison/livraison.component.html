@@ -1,0 +1,224 @@
+<p>work !!!!!!!!!!!</p>
+    <div class="app-wrapper">
+	    
+	    <div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">
+			    
+			    <div class="row g-3 mb-4 align-items-center justify-content-between">
+				    <div class="col-auto">
+			            <h1 class="app-page-title mb-0">Livraisons</h1>
+				    </div>
+				    <div class="col-auto">
+					     <div class="page-utilities">
+						    <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+							    <div class="col-auto">
+								    <form class="table-search-form row gx-1 align-items-center">
+					                    <div class="col-auto">
+					                        <input type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Search">
+					                    </div>
+					                    <div class="col-auto">
+					                        <button type="submit" class="btn app-btn-secondary">Search</button>
+					                    </div>
+					                </form>
+					                
+							    </div><!--//col-->
+							    <div class="col-auto">
+								    
+								    <select class="form-select w-auto"  #teams (click)="checkStatus(teams.value)">
+										  <option selected >All</option>
+										  <option >En cours de livraison</option>
+										  <option >Livré</option>
+										  <option >Clos</option>
+										  
+									</select>
+							    </div>
+							    <div class="col-auto">						    
+									<button (click)="download()">Download PDF</button>
+							    </div>
+						    </div><!--//row-->
+					    </div><!--//table-utilities-->
+				    </div><!--//col-auto-->
+			    </div><!--//row-->
+			   
+			    
+			    <nav id="orders-table-tab" class="orders-table-tab app-nav-tabs nav shadow-sm flex-column flex-sm-row mb-4">
+				    <a class="flex-sm-fill text-sm-center nav-link active" id="orders-all-tab" data-bs-toggle="tab" href="#orders-all" role="tab" aria-controls="orders-all" aria-selected="true">Livraisons</a>
+				</nav>
+					
+					<div class="tab-content" id="orders-table">
+						<div class="tab-pane fade show active" id="orders-all" role="tabpanel" aria-labelledby="orders-all-tab">
+							<div class="app-card app-card-orders-table shadow-sm mb-5">
+								<div class="app-card-body">
+									<div class="table-responsive">
+										<table class="table app-table-hover mb-0 text-left">
+											<thead>
+												<tr>
+													<th class="cell">Livraison ID</th>
+													<th class="cell">Adresse</th>
+													<th class="cell">Date de Livraison</th>
+													<th class="cell">Status</th>
+													<th class="cell">Client</th>
+	
+													<th class="cell"></th>
+												</tr>
+											</thead>
+											<tbody>
+												<ng-template [ngIf]=" teams.value == 'Livré'">
+
+												<tr *ngFor="let cmd of list, let i = index"  >
+												
+	
+													<ng-template [ngIf] = "cmd.isValid == 'Livré'">
+												
+													<td class="cell"  >{{cmd._id}}</td>
+	
+													<td class="cell">{{cmd.lieu}}</td>
+													<td class="cell">{{cmd.dateLivraison}}</td>
+											
+													<td class="cell" ><span class="badge bg-success" >{{cmd.isValid}}</span></td>
+	
+	
+												
+													<td class="cell">Islam JOUINI
+	
+	
+														
+													</td>
+													
+													<td> <button class="btn btn-sm btn-warning" (click)="delete(cmd._id)" >supprimer</button>
+														<button class="btn btn-sm btn-warning" routerLink="updateliv" [queryParams]="{ _id: cmd._id}">modifier</button></td>
+													
+				   <td>
+				</ng-template>
+					
+												</tr>
+											</ng-template>
+												
+											<ng-template [ngIf]=" teams.value == 'Clos'">
+
+												<tr *ngFor="let cmd of list, let i = index"  >
+													<ng-template [ngIf] = "cmd.isValid == 'Clos'">
+												
+		
+												
+													<td class="cell"  >{{cmd._id}}</td>
+		
+													<td class="cell">{{cmd.lieu}}</td>
+													<td class="cell">{{cmd.dateLivraison}}</td>
+													<td class="cell" ><span class="badge bg-danger" >{{cmd.isValid}}</span></td>
+		
+		
+											
+		
+													<td class="cell">Islam JOUINI
+		
+		
+														
+													</td>
+													
+													<td> <button class="btn btn-sm btn-warning" (click)="delete(cmd._id)" >supprimer</button>
+														<button class="btn btn-sm btn-warning" routerLink="updateliv" [queryParams]="{ _id: cmd._id}">modifier</button></td>
+													
+				   <td>
+				</ng-template>
+					
+												</tr>
+											</ng-template>
+											<ng-template [ngIf]=" teams.value == 'En cours de livraison' ">
+
+												<tr *ngFor="let cmd of list, let i = index"  >
+													<ng-template [ngIf] = "cmd.isValid == 'En cours de livraison'">
+												
+	
+												
+													<td class="cell"  >{{cmd._id}}</td>
+	
+													<td class="cell">{{cmd.lieu}}</td>
+													<td class="cell">{{cmd.dateLivraison}}</td>
+											
+													<td class="cell" ><span class="badge bg-warning" >{{cmd.isValid}}</span></td>
+	
+	
+												
+													<td class="cell">Islam JOUINI
+	
+	
+														
+													</td>
+													
+													<td> <button class="btn btn-sm btn-warning" (click)="delete(cmd._id)" >supprimer</button>
+														<button class="btn btn-sm btn-warning" routerLink="updateliv" [queryParams]="{ _id: cmd._id}">modifier</button></td>
+													
+				   <td>
+				</ng-template>
+					
+												</tr>
+												
+											</ng-template>
+	
+											<ng-template [ngIf]=" teams.value == 'All' " >
+												<tr *ngFor="let cmd of list, let i = index"  >
+												
+			
+												
+													<td class="cell"  >{{cmd._id}}</td>
+			
+													<td class="cell">{{cmd.lieu}}</td>
+													<td class="cell">{{cmd.dateLivraison}}</td>
+													<ng-template [ngIf] = "cmd.isValid == 'Clos'">
+
+													<td class="cell" ><span class="badge bg-danger" >{{cmd.isValid}}</span></td>
+			
+												</ng-template>
+
+												<ng-template [ngIf] = "cmd.isValid == 'En cours de livraison'">
+													<td class="cell" ><span class="badge bg-warning" >{{cmd.isValid}}</span></td>
+												</ng-template>
+			
+												<ng-template [ngIf]= "cmd.isValid == 'Livré'">
+													<td class="cell" ><span class="badge bg-success" >{{cmd.isValid}}</span></td>
+												</ng-template>
+			
+												<ng-template [ngIf]= "cmd.isValid != 'Livré' ">
+													<ng-template [ngIf] = " cmd.isValid != 'En cours de livraison' ">
+														<ng-template [ngIf]= "cmd.isValid != 'Clos' ">
+
+			
+													<td class="cell" ><span class="badge bg-info" >{{cmd.isValid}}</span></td>
+												</ng-template>
+			
+											</ng-template>
+										</ng-template>
+		
+													<td class="cell">Islam JOUINI
+			
+			
+														
+													</td>
+													
+													<td> <button class="btn btn-sm btn-warning" (click)="delete(cmd._id)" >supprimer</button>
+														<button class="btn btn-sm btn-warning" routerLink="updateliv" [queryParams]="{ _id: cmd._id}">modifier</button></td>
+													
+				   <td>
+					
+												</tr>
+											</ng-template>
+										</tbody>
+										</table>
+									</div><!--//table-responsive-->
+									
+					
+					
+				</div><!--//container-fluid-->
+			</div><!--//app-content-->
+		</div>
+		</div>
+		
+					
+
+	    <footer class="app-footer">
+		    <div class="container text-center py-3">
+		         <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+            <small class="copyright">Created with <span class="sr-only">love</span><i class="fas fa-heart" style="color: #fb866a;"></i> by <a class="app-link" href="http://themes.3rdwavemedia.com" target="_blank">Power Rangers</a> </small>
+		       
+		    </div>
